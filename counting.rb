@@ -7,7 +7,24 @@ class DNAstring < String
     @genome=genome
   end
 
-  def find_kterms(k)   #(genome, k)
+  def top_kterms(k)
+    results_out = Hash.new
+    max = 0
+    self.find_kterms(k).each do |pattern, count|
+      if (count > max)
+        results_out={} #remove all previous, there's a new max...
+        results_out[pattern]= count
+        max = count
+        # k-mer that repeats as often as current MAX - capture it.
+      elsif (count == max)
+        results_out[pattern] = count
+      end
+    end
+    return results_out
+  end
+
+  #find patterns of size "k" and return the ones that occur the most
+  def find_kterms(k) #(genome, k)
     temp = @genome
     results = Hash.new
     results_out = Hash.new
@@ -25,6 +42,7 @@ class DNAstring < String
       # Remove first character from "temp" i.e. copy everything except 1st character locat at [0]
       temp = temp[1..temp.length]
     end
+    return results
     #select strands that are more often repeated and prepare return in "return_out"
     results.each do |pattern, count|
       if (count > max)
@@ -39,13 +57,14 @@ class DNAstring < String
     return results_out #.keys.sort
   end
 
-  def find_kterm_index(pattern)#, genome)
+  # return Array of indexes, "results", where "pattern" occurs
+  def find_kterm_index(pattern) #, genome)
     results = []
-      for i in 0..@genome.length do
-        if @genome[i..i+pattern.length-1] == pattern
-          results.push(i)
-        end
+    for i in 0..@genome.length do
+      if @genome[i..i+pattern.length-1] == pattern
+        results.push(i)
       end
+    end
     return results #.keys.sort
   end
 
@@ -69,7 +88,9 @@ class DNAstring < String
     return reverse
   end
 end
-#a = DNAstring.new("GTTAAATTC")
+a = DNAstring.new("GTTAAATTC")
+a = DNAstring.new("TACAGGGTACAGGGTTTGCTTAGTTGAACATTTGCTTAGGGTCGGTGTTGAACATACAGGGTACAGGGTTTGCTTACGGTTATGCTACAGGGGTTGAACAGGGTCGGTTACAGGGGGGTCGGTCGGTTATGCGGGTCGGTTTTGCTTACGGTTATGCGTTGAACACGGTTATGCTACAGGGTTTGCTTACGGTTATGCTACAGGGGTTGAACAGTTGAACAGTTGAACATTTGCTTACGGTTATGCGGGTCGGTTTTGCTTATACAGGGTTTGCTTAGGGTCGGTGTTGAACAGTTGAACAGTTGAACATACAGGGGTTGAACAGGGTCGGTGGGTCGGTGGGTCGGTTACAGGGCGGTTATGCGTTGAACAGGGTCGGTTACAGGGGGGTCGGTCGGTTATGCTACAGGGTTTGCTTATTTGCTTATTTGCTTACGGTTATGCTACAGGGCGGTTATGCGGGTCGGTTACAGGGTACAGGGTACAGGGTACAGGGTTTGCTTAGTTGAACATTTGCTTAGTTGAACATACAGGGTTTGCTTACGGTTATGCGTTGAACAGTTGAACATTTGCTTAGGGTCGGTGGGTCGGTTACAGGGTTTGCTTAGTTGAACATTTGCTTAGTTGAACAGTTGAACAGGGTCGGTTTTGCTTAGGGTCGGTTTTGCTTATTTGCTTACGGTTATGCCGGTTATGCGTTGAACATTTGCTTAGTTGAACACGGTTATGCGGGTCGGTTACAGGGTTTGCTTAGGGTCGGTCGGTTATGCGTTGAACATTTGCTTAGTTGAACATACAGGGTTTGCTTACGGTTATGCCGGTTATGCTTTGCTTATACAGGGCGGTTATGCGGGTCGGTGGGTCGGTTTTGCTTATTTGCTTAGTTGAACATTTGCTTACGGTTATGCCGGTTATGCTACAGGGCGGTTATGCTTTGCTTA")
+puts a.top_kterms(13)
 #puts a.reverse_strand
 #a.genome = "GTTAAATTC"
 #puts a.reverse_strand
