@@ -7,27 +7,30 @@ class DNAstring < String
     @genome=genome
   end
 
+  # Returns a Hash of most repeated "k" size terms.
   def top_kterms(k)
     results_out = Hash.new
     max = 0
     self.find_kterms(k).each do |pattern, count|
-      if (count > max)
+      if count > max
         results_out={} #remove all previous, there's a new max...
         results_out[pattern]= count
         max = count
         # k-mer that repeats as often as current MAX - capture it.
-      elsif (count == max)
+      elsif count == max
         results_out[pattern] = count
       end
     end
     return results_out
   end
 
-  #find patterns of size "k" and return the ones that occur the most
+  #find patterns of size "k" and return a Hash with all...
   def find_kterms(k) #(genome, k)
     temp = @genome
+    #debug puts temp
     results = Hash.new
-    results_out = Hash.new
+    puts results
+    #results_out = Hash.new
     max = 0
     while temp.length>k-1
       count = 0
@@ -43,18 +46,6 @@ class DNAstring < String
       temp = temp[1..temp.length]
     end
     return results
-    #select strands that are more often repeated and prepare return in "return_out"
-    results.each do |pattern, count|
-      if (count > max)
-        results_out={} #remove all previous, there's a new max...
-        results_out[pattern]= count
-        max = count
-        # k-mer that repeats as often as current MAX - capture it.
-      elsif (count == max)
-        results_out[pattern] = count
-      end
-    end
-    return results_out #.keys.sort
   end
 
   # return Array of indexes, "results", where "pattern" occurs
@@ -68,7 +59,29 @@ class DNAstring < String
     return results #.keys.sort
   end
 
+  #return Hash of clumps with kmers of size "k", in a "l" length window and that appear at least "t" times.
+  def find_clumps(k, l, t)
+    result = Hash.new
+    for i in 0..@genome.length
+      #puts i
+      a=DNAstring.new
+      a.genome = @genome[i..i+l-1]
+     # puts a.genome
+      #DNAstring.new(@genome[i..i+l-1]).find_kterms(k).each do |pattern, count|
+      #puts a.find_kterms(k)
+      a.find_kterms(k).each_pair do |pattern, count|
+        if count >= t
+          result[pattern] = count
+      #    print "#{i} #{pattern} #{count}\n"
+        end
+      end
+      #i=i+l
+    end
+    return result
+  end
 
+
+  # reverse a genome strand. returns a String.
   def reverse_strand #(genome)
     reverse = String.new
     @genome.each_char do |a|
@@ -88,21 +101,19 @@ class DNAstring < String
     return reverse
   end
 end
-a = DNAstring.new("GTTAAATTC")
-a = DNAstring.new("TACAGGGTACAGGGTTTGCTTAGTTGAACATTTGCTTAGGGTCGGTGTTGAACATACAGGGTACAGGGTTTGCTTACGGTTATGCTACAGGGGTTGAACAGGGTCGGTTACAGGGGGGTCGGTCGGTTATGCGGGTCGGTTTTGCTTACGGTTATGCGTTGAACACGGTTATGCTACAGGGTTTGCTTACGGTTATGCTACAGGGGTTGAACAGTTGAACAGTTGAACATTTGCTTACGGTTATGCGGGTCGGTTTTGCTTATACAGGGTTTGCTTAGGGTCGGTGTTGAACAGTTGAACAGTTGAACATACAGGGGTTGAACAGGGTCGGTGGGTCGGTGGGTCGGTTACAGGGCGGTTATGCGTTGAACAGGGTCGGTTACAGGGGGGTCGGTCGGTTATGCTACAGGGTTTGCTTATTTGCTTATTTGCTTACGGTTATGCTACAGGGCGGTTATGCGGGTCGGTTACAGGGTACAGGGTACAGGGTACAGGGTTTGCTTAGTTGAACATTTGCTTAGTTGAACATACAGGGTTTGCTTACGGTTATGCGTTGAACAGTTGAACATTTGCTTAGGGTCGGTGGGTCGGTTACAGGGTTTGCTTAGTTGAACATTTGCTTAGTTGAACAGTTGAACAGGGTCGGTTTTGCTTAGGGTCGGTTTTGCTTATTTGCTTACGGTTATGCCGGTTATGCGTTGAACATTTGCTTAGTTGAACACGGTTATGCGGGTCGGTTACAGGGTTTGCTTAGGGTCGGTCGGTTATGCGTTGAACATTTGCTTAGTTGAACATACAGGGTTTGCTTACGGTTATGCCGGTTATGCTTTGCTTATACAGGGCGGTTATGCGGGTCGGTGGGTCGGTTTTGCTTATTTGCTTAGTTGAACATTTGCTTACGGTTATGCCGGTTATGCTACAGGGCGGTTATGCTTTGCTTA")
-puts a.top_kterms(13)
-#puts a.reverse_strand
-#a.genome = "GTTAAATTC"
-#puts a.reverse_strand
+
+a= DNAstring.new("CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGAGTGAAGAGAAGAGGAAACATTGTAA")
+puts a.find_clumps(5, 50, 4)
 
 #TEST Case for ktermsAL
+#a= DNAstring.new
 #a.genome ="TACAGGGTACAGGGTTTGCTTAGTTGAACATTTGCTTAGGGTCGGTGTTGAACATACAGGGTACAGGGTTTGCTTACGGTTATGCTACAGGGGTTGAACAGGGTCGGTTACAGGGGGGTCGGTCGGTTATGCGGGTCGGTTTTGCTTACGGTTATGCGTTGAACACGGTTATGCTACAGGGTTTGCTTACGGTTATGCTACAGGGGTTGAACAGTTGAACAGTTGAACATTTGCTTACGGTTATGCGGGTCGGTTTTGCTTATACAGGGTTTGCTTAGGGTCGGTGTTGAACAGTTGAACAGTTGAACATACAGGGGTTGAACAGGGTCGGTGGGTCGGTGGGTCGGTTACAGGGCGGTTATGCGTTGAACAGGGTCGGTTACAGGGGGGTCGGTCGGTTATGCTACAGGGTTTGCTTATTTGCTTATTTGCTTACGGTTATGCTACAGGGCGGTTATGCGGGTCGGTTACAGGGTACAGGGTACAGGGTACAGGGTTTGCTTAGTTGAACATTTGCTTAGTTGAACATACAGGGTTTGCTTACGGTTATGCGTTGAACAGTTGAACATTTGCTTAGGGTCGGTGGGTCGGTTACAGGGTTTGCTTAGTTGAACATTTGCTTAGTTGAACAGTTGAACAGGGTCGGTTTTGCTTAGGGTCGGTTTTGCTTATTTGCTTACGGTTATGCCGGTTATGCGTTGAACATTTGCTTAGTTGAACACGGTTATGCGGGTCGGTTACAGGGTTTGCTTAGGGTCGGTCGGTTATGCGTTGAACATTTGCTTAGTTGAACATACAGGGTTTGCTTACGGTTATGCCGGTTATGCTTTGCTTATACAGGGCGGTTATGCGGGTCGGTGGGTCGGTTTTGCTTATTTGCTTAGTTGAACATTTGCTTACGGTTATGCCGGTTATGCTACAGGGCGGTTATGCTTTGCTTA"
 #output
 # TACAGGGTTTGCT
 # ACAGGGTTTGCTT
 # CAGGGTTTGCTTA
-#k = 13
-#a.find_kterms(k).each { |k,v| puts k  }
+k = 13
+#a.top_kterms(k).each { |k,v| puts k  }
 
 
 # TEST CASE for kterms
