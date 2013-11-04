@@ -4,7 +4,7 @@
     <list default="true" id="196411c7-acda-4aa7-b261-5b814c6e72d9" name="Default" comment="" />
     <ignored path="Bioinformatics.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/counting.rb" changelist="196411c7-acda-4aa7-b261-5b814c6e72d9" time="1383590129875" ignored="false" />
+    <file path="/counting.rb" changelist="196411c7-acda-4aa7-b261-5b814c6e72d9" time="1383591096286" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +36,7 @@
       <file leaf-file-name="counting.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/counting.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="5" selection-start="2874" selection-end="2874" vertical-scroll-proportion="0.9593023">
+            <state line="2" column="54" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0872093">
               <folding />
             </state>
           </provider>
@@ -269,7 +269,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/counting.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="5" selection-start="2874" selection-end="2874" vertical-scroll-proportion="0.9593023">
+        <state line="2" column="54" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0872093">
           <folding />
         </state>
       </provider>

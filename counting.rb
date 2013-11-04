@@ -1,37 +1,10 @@
 class DNAstring < String
   # To change this template use File | Settings | File Templates.
-  #
-  # kterms: Find "k" size repeating patterns in "text" string.
-  # Explanation: Will create a "temp" copy of "text" and check how many times first K chars repeat in whole string.
-  #              At the end, remove first character from "temp" and start process again.
+  # DNAString - generic operations on a genome string.
   attr_accessor :genome
 
   def initialize(genome="")
     @genome=genome
-  end
-
-  def self.kterms_rubway(genome, k)
-    temp = genome
-    results = Hash.new
-    max = 0
-    while temp.length>k-1
-      count = 0
-      #Build pattern of k elements
-      pattern = temp[0..k-1]
-      count = genome.scan(/(?=#{pattern})/).size
-      # More repeated Kmer found - replace previous.
-      if (count > max)
-        results={} #remove all previous, there's a new max...
-        results[pattern]= count
-        max = count
-        # k-mer that repeats as often as current MAX - capture it.
-      elsif (count == max)
-        results[pattern] = count
-      end
-      # Remove first character from "temp" i.e. copy everything except 1st character locat at [0]
-      temp = temp[1..temp.length]
-    end
-    return results #.keys.sort
   end
 
   def find_kterms(k)   #(genome, k)
