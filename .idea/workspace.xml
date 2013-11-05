@@ -7,7 +7,7 @@
     <file path="/counting.rb" changelist="196411c7-acda-4aa7-b261-5b814c6e72d9" time="1383667463935" ignored="false" />
     <file path="/counting_spec.rb" changelist="196411c7-acda-4aa7-b261-5b814c6e72d9" time="1383643833264" ignored="false" />
     <file path="/test.rb" changelist="196411c7-acda-4aa7-b261-5b814c6e72d9" time="1383648901839" ignored="false" />
-    <file path="/clumps.rb" changelist="196411c7-acda-4aa7-b261-5b814c6e72d9" time="1383669676941" ignored="false" />
+    <file path="/clumps.rb" changelist="196411c7-acda-4aa7-b261-5b814c6e72d9" time="1383670146378" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +48,7 @@
       <file leaf-file-name="clumps.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clumps.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="2" selection-start="13990" selection-end="13990" vertical-scroll-proportion="0.6947674">
+            <state line="69" column="8626" selection-start="22479" selection-end="22479" vertical-scroll-proportion="0.52034885">
               <folding />
             </state>
           </provider>
@@ -343,7 +343,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.043181818" sideWeight="0.72438675" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3315972" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3315972" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -458,7 +458,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clumps.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="2" selection-start="13990" selection-end="13990" vertical-scroll-proportion="0.6947674">
+        <state line="69" column="8626" selection-start="22479" selection-end="22479" vertical-scroll-proportion="0.52034885">
           <folding />
         </state>
       </provider>
